@@ -11,6 +11,11 @@ def handle_esc():
             pygame.quit()
             sys.exit()
 
+def button_clicked():
+    mouse_pos = pygame.mouse.get_pos()
+    mouse_pressed = pygame.mouse.get_pressed()
+    
+
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Arcanoid")
 clock = pygame.time.Clock()
@@ -28,6 +33,22 @@ while True:
     if game_set.game_menu:
         play_bt.draw(screen)
         level_bt.draw(screen)
+
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_pressed = pygame.mouse.get_pressed()
+
+        if mouse_pressed[0]:
+            if play_bt.rect.collidepoint(mouse_pos):
+                game_set.game_menu = False
+            if level_bt.rect.collidepoint(mouse_pos):
+                if level_bt.level == 3:
+                    level_bt.level = 1
+                    level_bt.text = f"Level: {level_bt.level}"
+                else:
+                    level_bt.level += 1
+                    level_bt.text = f"Level: {level_bt.level}"
+
+        clock.tick(10)
     else:
         clock.tick(10)
         screen.fill(BACKGROUND_COLOR)
