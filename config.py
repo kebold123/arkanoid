@@ -18,6 +18,10 @@ PLAY_BUTTON_COLOR = (30, 255, 30)
 PLAY_BUTTON_TEXT_COLOR = (0, 0, 0)
 PLAY_BUTTON_TEXT = "Play"
 
+LEVEL_BUTTON_SIZE = (100, 30)
+LEVEL_BUTTON_COLOR = (200, 0, 255)
+LEVEL_BUTTON_TEXT_COLOR = (0, 0, 0)
+
 class Game_settings():
     def __init__(self):
         self.game_menu = True

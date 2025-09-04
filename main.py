@@ -20,12 +20,14 @@ pygame.init()
 vaus = Vaus()
 game_set = Game_settings()
 play_bt = Play()
+level_bt = Level(play_bt.size[1] + 10)
 
 while True:
     handle_esc()
 
     if game_set.game_menu:
         play_bt.draw(screen)
+        level_bt.draw(screen)
     else:
         clock.tick(10)
         screen.fill(BACKGROUND_COLOR)
