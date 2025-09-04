@@ -1,10 +1,11 @@
 import pygame
 import sys
 
-from vaus import Vaus
+from components.vaus import Vaus
 from config import *
+from components.settings import *
 
-def handle_keys():
+def handle_esc():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -17,22 +18,27 @@ clock = pygame.time.Clock()
 pygame.init()
 
 vaus = Vaus()
+game_set = Game_settings()
+play_bt = Play()
 
 while True:
-    clock.tick(10)
-    screen.fill(BACKGROUND_COLOR)
+    handle_esc()
 
-    handle_keys()
+    if game_set.game_menu:
+        play_bt.draw(screen)
+    else:
+        clock.tick(10)
+        screen.fill(BACKGROUND_COLOR)
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-        vaus.next_direction = "left"
-    elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-        vaus.next_direction = "right"
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            vaus.next_direction = "left"
+        elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            vaus.next_direction = "right"
 
-    vaus.update_direction()
+        vaus.update_direction()
 
-    vaus.move()
-    vaus.draw(screen)
+        vaus.move()
+        vaus.draw(screen)
 
     pygame.display.flip()

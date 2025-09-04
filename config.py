@@ -4,11 +4,23 @@ SCREEN_HEIGHT = 600
 CENTER = (SCREEN_WIDGHT // 2, SCREEN_HEIGHT // 2)
 
 BACKGROUND_COLOR = (0, 0, 0)
-VAUS_COLOR = (32, 255, 140)
 BALL_COLOR = (255, 0, 0)
-BRICK_COLOR = (0, 0, 255)
 
-VAUS_SIZE = (50, 13)
-VAUS_SPEED = 15
+VAUS_SIZE = (55, 13)
+VAUS_SPEED = 25
+VAUS_COLOR = (32, 255, 140)
 
 BRICK_SIZE = (40, 40)
+BRICK_COLOR = (0, 0, 255)
+
+PLAY_BUTTON_SIZE = (100, 50)
+PLAY_BUTTON_COLOR = (30, 255, 30)
+PLAY_BUTTON_TEXT_COLOR = (0, 0, 0)
+PLAY_BUTTON_TEXT = "Play"
+
+class Game_settings():
+    def __init__(self):
+        self.game_menu = True
+        self.lives = 3
+        self.score = 0
+        self.level = 1
