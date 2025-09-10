@@ -2,12 +2,12 @@ import pygame
 from config import *
 
 class Brick():
-    def __init__(self):
+    def __init__(self, position, color=BRICK_COLOR):
         self.size = BRICK_SIZE
-        self.color = BRICK_COLOR
-        self.position = None
-        self.hitbox = None
+        self.color = color
+        self.position = position
         self.is_destroyed = False
+        self.rect = pygame.Rect(self.position, self.size)
     
     def draw(self, screen):
-        pass
+        pygame.draw.rect(screen, self.color, self.rect)

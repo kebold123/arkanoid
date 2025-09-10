@@ -2,19 +2,38 @@ import pygame
 import sys
 
 from components.vaus import Vaus
+from components.brick import Brick
 from config import *
 from components.settings import *
+from random import randint
+
+
 
 def handle_esc():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                if play_bt.rect.collidepoint(event.pos):
+                    game_set.game_menu = False
+                if level_bt.rect.collidepoint(event.pos):
+                    if level_bt.level == 3:
+                        level_bt.level = 1
+                        level_bt.text = f"Level: {level_bt.level}"
+                        level_bt.change_level = True
+                    else:
+                        level_bt.level += 1
+                        level_bt.text = f"Level: {level_bt.level}"
+                        level_bt.change_level = True
 
-def button_clicked():
-    mouse_pos = pygame.mouse.get_pos()
-    mouse_pressed = pygame.mouse.get_pressed()
-    
+
+def draw_level(positions, screen):
+    for i in positions:
+        brick = Brick(position=i)
+        brick.draw(screen)
+
 
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Arcanoid")
@@ -27,31 +46,25 @@ game_set = Game_settings()
 play_bt = Play()
 level_bt = Level(play_bt.size[1] + 10)
 
+
 while True:
     handle_esc()
 
     if game_set.game_menu:
+        screen.fill(BACKGROUND_COLOR)
         play_bt.draw(screen)
         level_bt.draw(screen)
 
-        mouse_pos = pygame.mouse.get_pos()
-        mouse_pressed = pygame.mouse.get_pressed()
+        if level_bt.change_level:
+            level_bt.positions_for_bricks = positions_breaks(level_bt.level)
+            level_bt.change_level = False
 
-        if mouse_pressed[0]:
-            if play_bt.rect.collidepoint(mouse_pos):
-                game_set.game_menu = False
-            if level_bt.rect.collidepoint(mouse_pos):
-                if level_bt.level == 3:
-                    level_bt.level = 1
-                    level_bt.text = f"Level: {level_bt.level}"
-                else:
-                    level_bt.level += 1
-                    level_bt.text = f"Level: {level_bt.level}"
-
-        clock.tick(10)
+        clock.tick(15)
     else:
-        clock.tick(10)
+        clock.tick(35)
         screen.fill(BACKGROUND_COLOR)
+
+        draw_level(level_bt.positions_for_bricks, screen)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
