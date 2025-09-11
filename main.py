@@ -45,6 +45,7 @@ vaus = Vaus()
 game_set = Game_settings()
 play_bt = Play()
 level_bt = Level(play_bt.size[1] + 10)
+rect = pygame.Rect((SCREEN_WIDGHT + 10, SCREEN_HEIGHT - 10), level_bt.size)
 
 
 while True:
@@ -54,9 +55,11 @@ while True:
         screen.fill(BACKGROUND_COLOR)
         play_bt.draw(screen)
         level_bt.draw(screen)
+        pygame.draw.rect(screen, level_bt.color, rect)
 
         if level_bt.change_level:
             level_bt.positions_for_bricks = positions_breaks(level_bt.level)
+            print(level_bt.positions_for_bricks)
             level_bt.change_level = False
 
         clock.tick(15)

@@ -21,12 +21,12 @@ class Play():
 
 def positions_breaks(level):
         bricks = []
-        for i in range(level * 10):
+        for i in range(level * 30):
             flag = False
-            random_position = randint(2, SCREEN_WIDGHT // GRID_SIZE[0] - 1), randint(SCREEN_HEIGHT // 2 // GRID_SIZE[1] - 1, SCREEN_HEIGHT // GRID_SIZE[1] - 1)
+            random_position = ((randint(1, SCREEN_WIDGHT // GRID_SIZE[0] - 2)), (randint(1, SCREEN_HEIGHT // 2 // GRID_SIZE[1] - 1)))
             while not flag:
                 if random_position in bricks:
-                    random_position = randint(2, SCREEN_WIDGHT // GRID_SIZE[0] - 1), randint(SCREEN_HEIGHT // 2 // GRID_SIZE[1] - 1, SCREEN_HEIGHT // GRID_SIZE[1] - 1)
+                    random_position = randint(1, SCREEN_WIDGHT // GRID_SIZE[0] - 2), randint(1, SCREEN_HEIGHT // 2 // GRID_SIZE[1] - 1)
                 else:
                     bricks.append((random_position[0] * GRID_SIZE[0], random_position[1] * GRID_SIZE[1]))
                     flag = True
