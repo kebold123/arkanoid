@@ -3,7 +3,7 @@ from config import *
 
 class Vaus():
     def __init__(self):
-        self.position = (SCREEN_WIDGHT // 2 - VAUS_SIZE[0], SCREEN_HEIGHT // 8 * 7)
+        self.position = (SCREEN_WIDGHT // 2 - (VAUS_SIZE[0] // 2), SCREEN_HEIGHT // 8 * 7)
         self.last_position = None
         self.size = VAUS_SIZE
         self.speed = VAUS_SPEED

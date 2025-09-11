@@ -3,6 +3,7 @@ import sys
 
 from components.vaus import Vaus
 from components.brick import Brick
+from components.ball import Ball
 from config import *
 from components.settings import *
 from random import randint
@@ -45,7 +46,7 @@ vaus = Vaus()
 game_set = Game_settings()
 play_bt = Play()
 level_bt = Level(play_bt.size[1] + 10)
-rect = pygame.Rect((SCREEN_WIDGHT + 10, SCREEN_HEIGHT - 10), level_bt.size)
+ball = Ball()
 
 
 while True:
@@ -55,7 +56,6 @@ while True:
         screen.fill(BACKGROUND_COLOR)
         play_bt.draw(screen)
         level_bt.draw(screen)
-        pygame.draw.rect(screen, level_bt.color, rect)
 
         if level_bt.change_level:
             level_bt.positions_for_bricks = positions_breaks(level_bt.level)
@@ -68,6 +68,7 @@ while True:
         screen.fill(BACKGROUND_COLOR)
 
         draw_level(level_bt.positions_for_bricks, screen)
+        ball.draw(screen)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
