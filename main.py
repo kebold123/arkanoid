@@ -68,6 +68,8 @@ while True:
         screen.fill(BACKGROUND_COLOR)
 
         draw_level(level_bt.positions_for_bricks, screen)
+
+        ball.move()
         ball.draw(screen)
 
         keys = pygame.key.get_pressed()
