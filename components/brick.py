@@ -10,4 +10,5 @@ class Brick():
         self.rect = pygame.Rect(self.position, self.size)
     
     def draw(self, screen):
-        pygame.draw.rect(screen, self.color, self.rect)
+        if not self.is_destroyed:
+            pygame.draw.rect(screen, self.color, self.rect)

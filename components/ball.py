@@ -29,6 +29,15 @@ class Ball():
         if self.in_game:
             self.position = (self.position[0] + self.x_v, self.position[1] - self.y_v)
 
-    def check_collision(self, vaus, bricks):
-        pass
+    def check_collision(self, ball, vaus, bricks):
+        if ball.in_game:
+            if ball.position[0] - ball.size <= 0 or ball.position[0] + ball.size >= SCREEN_WIDGHT:
+                ball.x_v *= -1
+            if ball.position[1] - ball.size <= 0 :
+                ball.y_v *= -1
+            if vaus.position[0] - vaus.size[0] <= ball.position[0] <= vaus.position[0] + vaus.size[0] and vaus.position[1] <= ball.position[1] + ball.size:
+                ball.y_v *= -1
+        # if ball.in_game:
+        #     if ball..pygame.collidelist(bricks):
+        #         ball.y_v *= -1
         

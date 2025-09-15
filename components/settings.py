@@ -2,6 +2,7 @@ import pygame
 
 from config import *
 from random import randint
+from components.brick import Brick
 
 class Play():
     def __init__(self):
@@ -19,21 +20,26 @@ class Play():
         text_rect = text_surface.get_rect(center=self.rect.center)
         screen.blit(text_surface, text_rect)
 
-def positions_breaks(level):
+def create_breaks(level, screen):
         bricks = []
+        positions = []
         for i in range(level * 30):
             flag = False
             random_position = ((randint(1, SCREEN_WIDGHT // GRID_SIZE[0] - 2)), (randint(1, SCREEN_HEIGHT // 2 // GRID_SIZE[1] - 1)))
             while not flag:
-                if random_position in bricks:
+                if random_position in positions:
                     random_position = randint(1, SCREEN_WIDGHT // GRID_SIZE[0] - 2), randint(1, SCREEN_HEIGHT // 2 // GRID_SIZE[1] - 1)
                 else:
-                    bricks.append((random_position[0] * GRID_SIZE[0], random_position[1] * GRID_SIZE[1]))
+                    positions.append((random_position[0] * GRID_SIZE[0], random_position[1] * GRID_SIZE[1]))
                     flag = True
+        for i in positions:
+            brick = Brick(position=i)
+            bricks.append(brick)
+            brick.draw(screen)
         return bricks
 
 class Level():
-    def __init__(self, play_bt_size):
+    def __init__(self, play_bt_size, screen):
         self.level = 1
         self.position = (SCREEN_WIDGHT // 2 - LEVEL_BUTTON_SIZE[0] // 2, SCREEN_HEIGHT // 2 + play_bt_size)
         self.size = LEVEL_BUTTON_SIZE
@@ -42,7 +48,7 @@ class Level():
         self.text_color = LEVEL_BUTTON_TEXT_COLOR
         self.text = f"Level: {self.level}"
         self.rect = pygame.Rect(self.position, self.size)
-        self.positions_for_bricks = positions_breaks(self.level)
+        self.bricks = create_breaks(self.level, screen)
         self.change_level = False
 
     def draw(self, screen):
